@@ -1,3 +1,3 @@
 # jenkins-test
 
-push test 6
+push test 7
