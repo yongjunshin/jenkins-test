@@ -1,14 +1,19 @@
 pipeline {
   agent any
   stages {
-    stage('hello') {
+    stage('integration') {
       steps {
-        echo 'hello'
+        echo 'integration'
       }
     }
-    stage('bye') {
+    stage('validation') {
       steps {
-        echo 'bye'
+        echo 'validation'
+      }
+    }
+    stage('deployment') {
+      steps {
+        echo 'deployment'
       }
     }
   }
