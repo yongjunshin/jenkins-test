@@ -1,6 +1,12 @@
 pipeline {
   agent any
   stages {
+    stage('Debug') {
+      steps {
+        sh 'pwd'
+        sh 'ls -R'
+      }
+    } 
     stage('Check Environment') {
       steps {
         script {
@@ -20,7 +26,7 @@ pipeline {
     stage('Integration') {
       steps {
         script {
-          def scriptOutput = sh(script: 'python3 scripts/check_mobility_req.py', returnStdout: true).trim()
+          def scriptOutput = sh(script: 'python3 JenkinsScripts/integration_script.py', returnStdout: true).trim()
 
           if (scriptOutput.contains("TERMINATE")) {
               error("mobilityReq.txt not found. Pipeline terminated.")
