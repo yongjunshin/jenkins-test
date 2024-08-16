@@ -20,11 +20,8 @@ pipeline {
         script {
           // Check if the file exists
           if (fileExists('mobilityReq.txt')) {
-              // Read the file contents
-              def fileContents = readFile('mobilityReq.txt')
-              // Echo the file contents
-              echo "Contents of mobilityReq.txt:"
-              echo fileContents
+              // Print the file contents using cat
+              sh 'cat mobilityReq.txt'
           } else {
               echo "File mobilityReq.txt does not exist."
           }
