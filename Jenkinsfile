@@ -4,6 +4,7 @@ pipeline {
     stage('Check Python Version') {
       steps {
         sh 'python3 --version'
+      }
     }
     stage('integration') {
       steps {
