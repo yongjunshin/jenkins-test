@@ -47,5 +47,6 @@ pipeline {
           echo "Performing deployment..."
           // Add your deployment steps here
       }
+    }
   }
 }
