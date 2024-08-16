@@ -23,7 +23,7 @@ def check_mobility_req():
         
         with open("integrationResult.txt", "w") as f:
             f.write(f"{first_sentence}\n")
-            f.write(f"Integration completed successfully at {current_time}.")
+            f.write(f"Integration completed successfully at {current_time}.\n")
         print("PROCEED")
     else:
         print("mobilityReq.txt not found. Terminating pipeline.")
