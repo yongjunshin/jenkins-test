@@ -2,7 +2,7 @@ pipeline {
   agent any
 
   stages {
-    stage('Check Mobility Requirement') {
+    stage('Integration') {
       steps {
         script {
           def scriptOutput = sh(script: 'python3 JenkinsScripts/integration_script.py', returnStdout: true).trim()
@@ -10,17 +10,6 @@ pipeline {
         }
       }
     }
-
-    stage('Integration') {
-      when {
-        expression { env.MOBILITY_REQ_EXISTS == "true" }
-      }
-      steps {
-        echo "Performing integration..."
-        // Add your integration steps here
-      }
-    }
-
     stage('Validation') {
       when {
         expression { env.MOBILITY_REQ_EXISTS == "true" }
@@ -28,6 +17,18 @@ pipeline {
       steps {
         echo "Performing validation..."
         // Add your validation steps here
+        script {
+          // Check if the file exists
+          if (fileExists('mobilityReq.txt')) {
+              // Read the file contents
+              def fileContents = readFile('mobilityReq.txt')
+              // Echo the file contents
+              echo "Contents of mobilityReq.txt:"
+              echo fileContents
+          } else {
+              echo "File mobilityReq.txt does not exist."
+          }
+        }
       }
     }
 
