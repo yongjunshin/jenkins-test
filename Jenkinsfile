@@ -33,11 +33,11 @@ pipeline {
         // Add your validation steps here
         script {
           // Check if the file exists
-          if (fileExists('mobilityReq.txt')) {
+          if (fileExists('integrationResult.txt')) {
               // Print the file contents using cat
-              sh 'cat -v mobilityReq.txt'
+              sh 'cat -v integrationResult.txt'
           } else {
-              echo "File mobilityReq.txt does not exist."
+              echo "File integrationResult.txt does not exist."
           }
         }
       }
