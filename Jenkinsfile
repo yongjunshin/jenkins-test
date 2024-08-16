@@ -17,12 +17,14 @@ pipeline {
         sh 'python3 --version'
       }
     }
-    stage('integration') {
+    stage('Integration') {
       steps {
-        def scriptOutput = sh(script: 'python3 scripts/check_mobility_req.py', returnStdout: true).trim()
+        script {
+          def scriptOutput = sh(script: 'python3 scripts/check_mobility_req.py', returnStdout: true).trim()
 
-        if (scriptOutput.contains("TERMINATE")) {
-            error("mobilityReq.txt not found. Pipeline terminated.")
+          if (scriptOutput.contains("TERMINATE")) {
+              error("mobilityReq.txt not found. Pipeline terminated.")
+          }
         }
       }
     }
