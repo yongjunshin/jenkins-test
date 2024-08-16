@@ -19,24 +19,33 @@ pipeline {
     }
     stage('integration') {
       steps {
-        echo 'integration'
-        sh 'python3 JenkinsScripts/integration_script.py'
+        def scriptOutput = sh(script: 'python3 scripts/check_mobility_req.py', returnStdout: true).trim()
+
+        if (scriptOutput.contains("TERMINATE")) {
+            error("mobilityReq.txt not found. Pipeline terminated.")
+        }
       }
     }
     stage('validation') {
+      when {
+          expression { 
+              return fileExists('integrationResult.txt')
+          }
+      }
       steps {
-        echo 'validation'
+          echo "Performing validation..."
+          // Add your validation steps here
       }
     }
     stage('deployment') {
-      steps {
-        echo 'deployment'
+      when {
+          expression { 
+              return fileExists('integrationResult.txt')
+          }
       }
-    }
-    stage('clean-up') {
       steps {
-        echo 'bye'
+          echo "Performing deployment..."
+          // Add your deployment steps here
       }
-    }
   }
 }
