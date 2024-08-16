@@ -35,7 +35,7 @@ pipeline {
           // Check if the file exists
           if (fileExists('mobilityReq.txt')) {
               // Print the file contents using cat
-              sh 'cat mobilityReq.txt'
+              sh 'cat -v mobilityReq.txt'
           } else {
               echo "File mobilityReq.txt does not exist."
           }

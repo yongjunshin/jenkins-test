@@ -1,7 +1,7 @@
 import os
 from datetime import datetime
 
-def get_first_sentence(file_path):
+def integration_function(file_path):
     try:
         with open(file_path, 'r') as file:
             content = file.read().strip()
@@ -19,10 +19,10 @@ def check_mobility_req():
         current_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         print("mobilityReq.txt found. Generating integrationResult.txt...")
         
-        first_sentence = get_first_sentence("mobilityReq.txt")
+        integration_results = integration_function("mobilityReq.txt")
         
         with open("integrationResult.txt", "w") as f:
-            f.write(f"{first_sentence}\n")
+            f.write(f"{integration_results}\n")
             f.write(f"Integration completed successfully at {current_time}.\n")
         print("PROCEED")
     else:
