@@ -5,7 +5,7 @@ pipeline {
     stage('Check Mobility Requirement') {
       steps {
         script {
-          def scriptOutput = sh(script: 'python3 scripts/check_mobility_req.py', returnStdout: true).trim()
+          def scriptOutput = sh(script: 'python3 JenkinsScripts/integration_script.py', returnStdout: true).trim()
           env.MOBILITY_REQ_EXISTS = scriptOutput.contains("PROCEED") ? "true" : "false"
         }
       }
