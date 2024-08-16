@@ -16,7 +16,7 @@ pipeline {
       steps {
         echo 'validation'
       }
-    }특정
+    }
     stage('deployment') {
       steps {
         echo 'deployment'
