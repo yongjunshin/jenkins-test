@@ -1,16 +1,21 @@
 pipeline {
   agent any
   stages {
+    stage('Check Python Version') {
+      steps {
+        sh 'python3 --version'
+    }
     stage('integration') {
       steps {
         echo 'integration'
+        sh 'python3 JenkinsScripts/integration_script.py'
       }
     }
     stage('validation') {
       steps {
         echo 'validation'
       }
-    }
+    }특정
     stage('deployment') {
       steps {
         echo 'deployment'
