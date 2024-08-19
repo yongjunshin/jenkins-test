@@ -16,20 +16,21 @@ pipeline {
         }
       }
     }
-    stage('Integration') {
+    stage('CI/CV/CD') {
       steps {
+        echo "Performing CI/CV/CD ..."
         script {
           def scriptOutput = sh(script: 'python3 JenkinsScripts/integration_script.py', returnStdout: true).trim()
           env.MOBILITY_REQ_EXISTS = scriptOutput.contains("PROCEED") ? "true" : "false"
         }
       }
     }
-    stage('Validation') {
+    stage('Build') {
       when {
         expression { env.MOBILITY_REQ_EXISTS == "true" }
       }
       steps {
-        echo "Performing validation..."
+        echo "Performing Build ..."
         // Add your validation steps here
         script {
           // Check if the file exists
@@ -39,20 +40,10 @@ pipeline {
           } else {
               echo "File integrationResult.txt does not exist."
           }
+          echo "Run build script."
         }
       }
     }
-
-    stage('Deployment') {
-      when {
-        expression { env.MOBILITY_REQ_EXISTS == "true" }
-      }
-      steps {
-        echo "Performing deployment..."
-        // Add your deployment steps here
-      }
-    }
-
     stage('Alternative Path') {
       when {
         expression { env.MOBILITY_REQ_EXISTS == "false" }
@@ -63,7 +54,6 @@ pipeline {
       }
     }
   }
-
   post {
     always {
       echo "Pipeline completed."
