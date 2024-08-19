@@ -31,7 +31,6 @@ pipeline {
       }
       steps {
         echo "Performing Build ..."
-        // Add your validation steps here
         script {
           // Check if the file exists
           if (fileExists('integrationResult.txt')) {
