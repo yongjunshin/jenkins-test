@@ -2,17 +2,11 @@ pipeline {
   agent any
 
   stages {
-    stage('Delete previous CI/CV/CD results') {
+    stage('Make CI/CV/CD output directory') {
       steps {
         script {
           // Check if the file exists
-          if (fileExists('integrationResult.txt')) {
-            // Delete the file using the shell command
-            sh 'rm -f integrationResult.txt'
-            echo "File integrationResult.txt has been deleted."
-          } else {
-            echo "File integrationResult.txt does not exist."
-          }
+          sh 'mkdir output'
         }
       }
     }
