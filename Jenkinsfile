@@ -6,6 +6,7 @@ pipeline {
       steps {
         script {
           // Check if the file exists
+          sh 'rm -rf output'
           sh 'mkdir output'
         }
       }
