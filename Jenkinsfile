@@ -43,11 +43,13 @@ pipeline {
         echo "Performing Build ..."
         script {
           // Check if the file exists
-          if (fileExists('output/integrationResult.txt') and fileExists('output/integration.launch.py') and fileExists('output/setup.py')) {
+          if (fileExists('output/integrationResult.txt') && fileExists('output/integration.launch.py') && fileExists('output/setup.py')) {
               // Print the file contents using cat
-              sh 'cat -v integrationResult.txt'
+              sh 'cat output/integrationResult.txt'
+              sh 'cat output/integration.launch.py'
+              sh 'cat output/setup.py'
           } else {
-              echo "File integrationResult.txt does not exist."
+              echo "Output files do not exist."
           }
           echo "Run build script."
         }
