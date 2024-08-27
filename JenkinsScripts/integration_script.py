@@ -6,7 +6,7 @@ def integration_function(file_path):
         with open(file_path, 'r') as file:
             content = file.read().strip()
             if "segmentation" in content.lower():
-                return ["a", "b", "c"]
+                return ["a", "b", "c", "d"]
             else:
                 return ["a", "b"]
     except FileNotFoundError:
@@ -21,7 +21,7 @@ def check_mobility_req():
         
         integration_results = integration_function("mobilityReq.txt")
         
-        with open("integrationResult.txt", "w") as f:
+        with open("output/integrationResult.txt", "w") as f:
             f.write(f"Integrated ROS nodes: {integration_results}\n")
             f.write(f"Integration completed successfully at {current_time}.\n")
         print("PROCEED")

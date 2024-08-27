@@ -25,6 +25,16 @@ pipeline {
         }
       }
     }
+    stage('Generate ROS Build Files') {
+      when {
+        expression { env.MOBILITY_REQ_EXISTS == "true" }
+      }
+      steps {
+        script {
+          def scriptOutput = sh(script: 'python3 JenkinsScripts/generate_ros_build_files.py', returnStdout: true).trim()
+        }
+      }
+    }
     stage('Build') {
       when {
         expression { env.MOBILITY_REQ_EXISTS == "true" }
@@ -33,7 +43,7 @@ pipeline {
         echo "Performing Build ..."
         script {
           // Check if the file exists
-          if (fileExists('integrationResult.txt')) {
+          if (fileExists('output/integrationResult.txt') and fileExists('output/integration.launch.py') and fileExists('output/setup.py')) {
               // Print the file contents using cat
               sh 'cat -v integrationResult.txt'
           } else {
